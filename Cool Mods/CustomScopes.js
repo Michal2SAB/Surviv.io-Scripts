@@ -422,9 +422,6 @@ font-size: 0.6em;
 
     language = window.navigator.userLanguage || window.navigator.language
 
-    if(language.includes("ru")) selLang = lang.ru
-    if(debug) console.log("Язык:", language, selLang)
-
     function loadStorage(){
         let ObjSaveCursors_tmp = GM_getValue('ObjSaveCursors');
 
@@ -437,7 +434,7 @@ font-size: 0.6em;
             cursorList:{},
             currentActive:null
         };
-        // Доп. поля опций, если нет
+
         if(ObjSaveCursors.hasOwnProperty("options")){
             if(!ObjSaveCursors.options.hasOwnProperty("buttonShow")) ObjSaveCursors.options.buttonShow = true
             if(!ObjSaveCursors.options.hasOwnProperty("laserSetting")){
@@ -655,22 +652,6 @@ font-size: 0.6em;
                 ticker_frame(function(){
                     laserUpdate(params, color, widthLine, dotted)
                 });
-                /* Old version update mouse move
-                $(document).mousemove(function(event){
-                    let w = params.canvas.width,
-                        h = params.canvas.height
-                    $(params.canvas).attr({'width': params.cvs.width, 'height': params.cvs.height})
-                    params.ctx.beginPath()
-                    if(dotted != null) params.ctx.setLineDash(dotted);
-                    params.ctx.strokeStyle=color
-                    params.ctx.lineWidth=widthLine
-                    params.ctx.moveTo(w/2,h/2)
-
-                    let posXY = current_game == "zombsroyale" ? {x:event.pageX/1.42857, y:event.pageY/1.42857} : {x:event.pageX, y:event.pageY}
-
-                    os_var == "win" ? params.ctx.lineTo(posXY.x, posXY.y) : os_var == "mac" ? params.ctx.lineTo(2*posXY.x, 2*posXY.y) : params.ctx.lineTo(posXY.x, posXY.y)
-                    params.ctx.stroke();
-                })*/
             }
         }
     }
@@ -726,7 +707,6 @@ font-size: 0.6em;
             })
                 .click(function(){
                 if(firststart && ObjSaveCursors.options.firstRun) {
-                    if(debug) console.log("Прицелы не найдены, загрузить стандартные!")
                     loadDefaultScopes(firststart)
                     ObjSaveCursors.options.firstRun = false
                     saveToStorage()
@@ -784,8 +764,7 @@ font-size: 0.6em;
                         "<div class='mPanel_cur_foot'>"+
                         "<div class='cur_sel_button_box'></div>"+
                         "<div class='infoBlock'>"+
-                        "<a href='https://docs.google.com/document/d/1XTnSJoJHyQdqxPfmMYoBSyToXHKEW4QnQDAVsL9tcgU' target='_blank' style='color: yellow !important;' title='"+selLang.donate[1]+"'>"+selLang.donate[0]+"</a>"+
-                        "<a href='https://github.com/AlekPet' target='_blank' title='AlekPet Guthub ^_^' style=''color: #56fff1 !important;''>AlekPet 2018</a>"+
+                        "<a href='https://github.com/Michal2SAB' target='_blank' title='Michal2SAB Github ^_^' style=''color: #56fff1 !important;''>Michal2SAB 2020</a>"+
                         "</div>"+
                         "</div>"+
                         "</div>"),
@@ -797,7 +776,6 @@ font-size: 0.6em;
                 if(ObjSaveCursors.hasOwnProperty("options") && ObjSaveCursors.options.hasOwnProperty("buttonShow")){
                     ObjSaveCursors.options.buttonShow = this.checked
                     saveToStorage();
-                    if(debug) console.log('Показывать кнопку в игре:',this.checked)
                     $("#buttonInGame").css("display", this.checked ? "block" : "none")
                 }
             }),
@@ -901,7 +879,7 @@ font-size: 0.6em;
                     $(this).css("cursor","url("+this.src+")"+this.naturalWidth/2+" "+this.naturalHeight/2+", default")
                 }).attr("src", self.change_color ? self.change_color.src_new : self.cururl),
                 divImgBox = $("<div class='element_cur_title'>").append(divImg),
-                delCheck = $("<input class='checkbox_del_cur' type='checkbox' title='Удаление'>").click(function(event){
+                delCheck = $("<input class='checkbox_del_cur' type='checkbox' title='del'>").click(function(event){
                     event.stopPropagation();
                 }),
                 editButton = $("<input type='button' class='checkbox_edit_cur' value='"+selLang.editCrosshair+"' title='"+selLang.editCrosshair+"'>").click(function(event){
@@ -1281,7 +1259,6 @@ font-size: 0.6em;
         let firststart = false;
         if(loadStorage()){
             firststart = true
-            if(debug) console.log("Первый запуск!", firststart)
         }
         console.log("Current game: ", current_game, "Laser support:", game_support[current_game].laser)
         makeMenuButton(firststart)
