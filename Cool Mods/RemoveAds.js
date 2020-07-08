@@ -12,6 +12,9 @@ setInterval(function() {
     delAds("leaderboard-front");
     delAds("ad-block-left");
     delAds("start-bottom-left");
+    delAds("news-block");
+    delAds("social-share-wrapper");
+    delAds("social-share-block");
     delAds("adunit");
     delAds("ui-stats-ad-container-desktop");
     delAds("surviv-io_728x90")
