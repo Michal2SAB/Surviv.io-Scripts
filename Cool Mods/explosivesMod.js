@@ -1,22 +1,3 @@
- 
-Greasy Fork
-Michal2SAB [ Sign out ] 
-English (en)
-Scripts Forum Help More
-Info
-Code
-History
-Feedback (0)
-Stats
-Derivatives
-Update
-Delete
-Admin
-Explosives Mod
-Increases the size of throwables, making it easier to avoid them. Makes it very easy to notice mines.
-
-Install this script?
-Ask a question, post a review, or report the script.
 // ==UserScript==
 // @name         Explosives Mod
 // @namespace    https://github.com/Michal2SAB
