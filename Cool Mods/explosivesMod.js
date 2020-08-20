@@ -1,8 +1,27 @@
+ 
+Greasy Fork
+Michal2SAB [ Sign out ] 
+English (en)
+Scripts Forum Help More
+Info
+Code
+History
+Feedback (0)
+Stats
+Derivatives
+Update
+Delete
+Admin
+Explosives Mod
+Increases the size of throwables, making it easier to avoid them. Makes it very easy to notice mines.
+
+Install this script?
+Ask a question, post a review, or report the script.
 // ==UserScript==
 // @name         Explosives Mod
 // @namespace    https://github.com/Michal2SAB
-// @version      1.0
-// @description  Increases the size of grenades, making it easier to avoid them. Makes it very easy to notice mines.
+// @version      2.0
+// @description  Increases the size of throwables, making it easier to avoid them. Makes it very easy to notice mines.
 // @author       Michal2SAB
 // @match        *://surviv.io/*
 // @match        *://surviv2.io/*
@@ -23,47 +42,32 @@
 // @grant        none
 // ==/UserScript==
 
-var grenades = webpackJsonp([], null, ["035f2ecb"]);
+(function() {
+    'use strict';
 
-// Grenades
+var throwables = ""
 
-grenades.frag.worldImg.scale = .25
-grenades.frag.handImg.cook.right.scale = .30
-grenades.frag.handImg.cook.left.scale = .30
+// Some important shit for this whole thing to work
 
-grenades.mirv.worldImg.scale = .26
-grenades.mirv.handImg.cook.right.scale = .31
-grenades.mirv.handImg.cook.left.scale = .31
+var func = {
+    webpack_inject: (w, e, get) => {
+        throwables = get("035f2ecb")
+    },
+};
 
-grenades.mirv_mini.worldImg.scale = .25
+if(typeof window.webpackJsonp === 'function') {
+    window.webpackJsonp([0], func, ["webpack_inject"]);
+} else {
+    window.webpackJsonp.push([
+        ["webpack_inject"],
+        func,
+        [["webpack_inject"]]
+    ]);
+}
 
-grenades.martyr_nade.worldImg.scale = .25
+// do the magic
 
-grenades.strobe.worldImg.scale = .25
-grenades.strobe.handImg.cook.right.scale = .31
-grenades.strobe.handImg.cook.left.scale = .31
-
-grenades.snowball.worldImg.scale = .25
-grenades.snowball.handImg.cook.right.scale = .31
-
-grenades.water_balloon.worldImg.scale = .25
-grenades.water_balloon.handImg.cook.right.scale = .30
-
-grenades.snowball_heavy.worldImg.scale = .15
-
-grenades.potato.worldImg.scale = .25
-grenades.potato.handImg.cook.right.scale = .31
-
-grenades.potato_heavy.worldImg.scale = .15
-
-grenades.potato_cannonball.worldImg.scale = .15
-
-grenades.bomb_iron.worldImg.scale = .25
-
-grenades.motherShip_cannon_shot.worldImg.scale = .25
-
-grenades.mine.worldImg.scale = .25
-grenades.mine.handImg.cook.right.scale = .31
-
-grenades.skitternade.worldImg.scale = .25
-grenades.skitternade.handImg.cook.right.scale = .29
+Object.keys(throwables).forEach(function(key) {
+    throwables[key].worldImg.scale = .25
+})
+})();
