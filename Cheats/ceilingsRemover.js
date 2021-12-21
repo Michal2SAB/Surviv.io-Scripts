@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Surviv.io ceilings remover
 // @namespace    https://github.com/Michal2SAB
-// @version      1.0
+// @version      1.1
 // @description  Removes ceilings, allowing you to look through buildings, bunkers, containers etc.
 // @author       Michal2SAB
 // @match        *://surviv.io/*
@@ -51,7 +51,7 @@ if(typeof window.webpackJsonp === 'function') {
 Object.keys(ceilings).forEach(function(key) {
     if(ceilings[key].type === "building") {
         for(var ceilImg in ceilings[key].ceiling.imgs) {
-            ceilings[key].ceiling.imgs[ceilImg].sprite = ""
+            ceilings[key].ceiling.imgs[ceilImg].alpha = 0.5
         }
     }
 })
